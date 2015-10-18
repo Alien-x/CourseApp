@@ -9,5 +9,5 @@
     tools:context=".MainActivity"
     android:columnCount="2"
     android:rowCount="3"
-    android:background="@color/accent_2">
+    android:background="?colorAccent">
 </GridLayout>

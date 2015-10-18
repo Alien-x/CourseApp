@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uco374366.movio.pv256.fi.muni.cz.courseapp" >
+    package="cz.muni.fi.pv256.uco374366" >
 
     <application
         android:allowBackup="true"
