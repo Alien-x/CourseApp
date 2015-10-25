@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cz.muni.fi.pv256.uco374366.Model.Film;
@@ -22,7 +23,13 @@ public class FilmAdapter extends BaseAdapter {
 
     public FilmAdapter(Context context, List<Film> films) {
         mContext = context;
-        mFilms = films;
+
+        if(films != null) {
+            mFilms = films;
+        }
+        else {
+            mFilms = new ArrayList<>();
+        }
     }
 
     @Override
