@@ -14,7 +14,7 @@
         android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
         tools:context=".MainActivity"
-        android:numColumns="2"
+        android:numColumns="3"
         android:background="?colorAccent"
         android:id="@+id/gridViewFilms">
     </GridView>
