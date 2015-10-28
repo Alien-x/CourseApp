@@ -11,7 +11,7 @@ public class FilmActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_film);
+        setContentView(R.layout.film_detail_fragment);
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
 
