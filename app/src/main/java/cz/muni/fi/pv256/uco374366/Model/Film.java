@@ -1,9 +1,12 @@
 package cz.muni.fi.pv256.uco374366.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Z on 18. 10. 2015.
  */
-public class Film {
+public class Film implements Parcelable {
 
     private long mReleaseDay;
     private String mCoverPath;
@@ -64,5 +67,36 @@ public class Film {
     @Override
     public int hashCode() {
         return (int)mReleaseDay * 47 + mTitle.hashCode();
+    }
+
+    /* PARCELABLE */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mCoverPath);
+        dest.writeString(mTitle);
+        dest.writeInt(mCoverResource);
+        dest.writeLong(mReleaseDay);
+    }
+
+    public static final Parcelable.Creator<Film> CREATOR = new Parcelable.Creator<Film>() {
+        public Film createFromParcel(Parcel in) {
+            return new Film(in);
+        }
+
+        public Film[] newArray(int size) {
+            return new Film[size];
+        }
+    };
+
+    private Film(Parcel in) {
+        mCoverPath = in.readString();
+        mTitle = in.readString();
+        mCoverResource = in.readInt();
+        mReleaseDay = in.readLong();
     }
 }

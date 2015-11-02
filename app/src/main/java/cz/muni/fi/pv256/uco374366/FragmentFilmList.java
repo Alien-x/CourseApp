@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,7 @@ public class FragmentFilmList extends Fragment{
         View view = inflater.inflate(R.layout.film_list_fragment, container, false);
 
         // gridview
-        GridView gridview = (GridView) view.findViewById(R.id.gridViewFilms);
+        StickyGridHeadersGridView gridview = (StickyGridHeadersGridView) view.findViewById(R.id.gridViewFilms);
 
         if(isOnline()) {
             // fake data
@@ -54,24 +57,20 @@ public class FragmentFilmList extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("film list", "ItemClick");
 
+                // tablet
                 if(mFragmentFilmDetail != null) {
-                    Log.d("film list", "set film");
+                    Log.d("film list", "set fragment detail");
                     mFragmentFilmDetail.setFilm(mFilms.get(position));
                     mFragmentFilmDetail.refreshLayout();
                 }
+                // mobile
                 else {
-                    Log.d("film list", "new fragment");
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Log.d("film list", "new activity detail");
 
-                    FragmentFilmDetail fragmentFilmDetail = new FragmentFilmDetail();
-                    fragmentFilmDetail.setFilm(mFilms.get(position));
 
-                    fragmentTransaction
-                            .replace(R.id.film_list_fragment, fragmentFilmDetail, "FILM_DETAIL")
-                            .addToBackStack("FILM_DETAIL")
-                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            .commit();
+                    Intent intent = new Intent(getActivity(), FilmDetailFragmentActivity.class);
+                    intent.putExtra("FILM", mFilms.get(position));
+                    startActivity(intent);
                 }
 
             }
@@ -92,6 +91,7 @@ public class FragmentFilmList extends Fragment{
     public void setFragmentFilmDetail(FragmentFilmDetail fragmentFilmDetail) {
         mFragmentFilmDetail = fragmentFilmDetail;
     }
+
 
     private boolean isOnline() {
         ConnectivityManager cm =
