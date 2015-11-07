@@ -1,8 +1,6 @@
 package cz.muni.fi.pv256.uco374366;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -13,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.Toast;
+import android.support.v4.util.LongSparseArray;
 
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
@@ -23,14 +21,14 @@ import java.util.List;
 
 import cz.muni.fi.pv256.uco374366.Model.Film;
 
-public class FragmentFilmList extends Fragment{
+public class FragmentFilmList extends Fragment {
 
     private FragmentFilmDetail mFragmentFilmDetail = null;
     private List<Film> mFilms = new ArrayList<>();
+    private LongSparseArray<String> mHeaders = new LongSparseArray<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.film_list_fragment, container, false);
 
         // gridview
@@ -38,14 +36,24 @@ public class FragmentFilmList extends Fragment{
 
         if(isOnline()) {
             // fake data
-            mFilms.add(new Film("Alien vs. Predator", 0, R.drawable.avp));
-            mFilms.add(new Film("American Pie", 0, R.drawable.american_pie));
-            mFilms.add(new Film("Rocky", 0, R.drawable.rocky));
-            mFilms.add(new Film("How to train your dragon", 0, R.drawable.dragon));
-            mFilms.add(new Film("Starship troopers", 0, R.drawable.starship_troopers));
+            mFilms.add(new Film(1, 1, "Alien vs. Predator", 0, R.drawable.avp));
+            mFilms.add(new Film(2, 1, "American Pie", 0, R.drawable.american_pie));
+            mFilms.add(new Film(3, 1, "Rocky", 0, R.drawable.rocky));
+            mFilms.add(new Film(4, 2, "How to train your dragon", 0, R.drawable.dragon));
+            mFilms.add(new Film(5, 2, "Starship troopers", 0, R.drawable.starship_troopers));
+
+            mHeaders.append(1, "In Theaters Now");
+            mHeaders.append(2, "Most Popular");
 
             gridview.setEmptyView(view.findViewById(R.id.emptyView));
-            gridview.setAdapter(new FilmAdapter(getActivity().getApplicationContext(), mFilms));
+            gridview.setAdapter(new FilmAdapter(getActivity().getApplicationContext(), mFilms, mHeaders));
+
+            // tablet
+            if(mFragmentFilmDetail != null) {
+                Log.d("film list", "set fragment detail");
+                mFragmentFilmDetail.setFilm(mFilms.get(0));
+                mFragmentFilmDetail.refreshLayout();
+            }
         }
         else {
             gridview.setEmptyView(view.findViewById(R.id.noConnectionView));

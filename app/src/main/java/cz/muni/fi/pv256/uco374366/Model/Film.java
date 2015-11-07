@@ -12,20 +12,44 @@ public class Film implements Parcelable {
     private String mCoverPath;
     private String mTitle;
     private int mCoverResource;
+    private long mID;
 
 
-    public Film(String title, long releaseDay, String coverPath) {
+
+    private long mHeader;
+
+
+    public Film(long ID, long header, String title, long releaseDay, String coverPath) {
+        mID = ID;
+        mHeader = header;
         mTitle = title;
         mReleaseDay = releaseDay;
         mCoverPath = coverPath;
     }
 
-    public Film(String title, long releaseDay, int coverResource) {
+    public Film(long ID, long header, String title, long releaseDay, int coverResource) {
+        mID = ID;
+        mHeader = header;
         mTitle = title;
         mReleaseDay = releaseDay;
         mCoverResource = coverResource;
     }
 
+    public long getID() {
+        return mID;
+    }
+
+    public void setID(int ID) {
+        mID = ID;
+    }
+
+    public long getHeader() {
+        return mHeader;
+    }
+
+    public void setHeader(long header) {
+        mHeader = header;
+    }
 
     public void setReleaseDay(long releaseDay) {
         mReleaseDay = releaseDay;

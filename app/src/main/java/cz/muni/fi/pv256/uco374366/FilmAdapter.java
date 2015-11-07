@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.support.v4.util.LongSparseArray;
+import android.widget.TextView;
+
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +20,31 @@ import cz.muni.fi.pv256.uco374366.Model.Film;
 /**
  * Created by Z on 18. 10. 2015.
  */
-public class FilmAdapter extends BaseAdapter {
+public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
 
     private Context mContext;
     private List<Film> mFilms;
+    private LongSparseArray<String> mHeaders;
+    private LayoutInflater mInflater;
 
-    public FilmAdapter(Context context, List<Film> films) {
+    public FilmAdapter(Context context, List<Film> films, LongSparseArray<String> headers) {
         mContext = context;
+        mInflater = LayoutInflater.from(context);
 
+        // film list
         if(films != null) {
             mFilms = films;
         }
         else {
             mFilms = new ArrayList<>();
+        }
+
+        // headers list
+        if(headers != null) {
+            mHeaders = headers;
+        }
+        else {
+            mHeaders = new LongSparseArray<>();
         }
     }
 
@@ -44,7 +60,7 @@ public class FilmAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return (long)mFilms.get(i).getTitle().hashCode();
+        return mFilms.get(i).getID();
     }
 
     @Override
@@ -55,6 +71,7 @@ public class FilmAdapter extends BaseAdapter {
     private static class ViewHolder {
         ImageView cover;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -72,5 +89,25 @@ public class FilmAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.cover.setImageResource(mFilms.get(position).getCoverResource());                   // mFilms.get(position).getCoverPath()
         return convertView;
+    }
+
+    @Override
+    public long getHeaderId(int position) {
+        return mFilms.get(position).getHeader();
+    }
+
+    @Override
+    public View getHeaderView(int position, View convertView, ViewGroup parent) {
+
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.film_group_header, parent, false);
+        }
+
+        TextView headerText = (TextView) convertView.findViewById(R.id.film_group_header);
+        headerText.setText(mHeaders.get(getHeaderId(position)));
+
+        return convertView;
+
     }
 }
