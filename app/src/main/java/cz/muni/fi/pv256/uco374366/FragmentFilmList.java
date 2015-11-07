@@ -50,7 +50,7 @@ public class FragmentFilmList extends Fragment {
 
             // tablet
             if(mFragmentFilmDetail != null) {
-                Log.d("film list", "set fragment detail");
+                Logger.log("film list", "set fragment detail");
                 mFragmentFilmDetail.setFilm(mFilms.get(0));
                 mFragmentFilmDetail.refreshLayout();
             }
@@ -63,17 +63,17 @@ public class FragmentFilmList extends Fragment {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("film list", "ItemClick");
+                Logger.log("film list", "ItemClick");
 
                 // tablet
                 if(mFragmentFilmDetail != null) {
-                    Log.d("film list", "set fragment detail");
+                    Logger.log("film list", "set fragment detail");
                     mFragmentFilmDetail.setFilm(mFilms.get(position));
                     mFragmentFilmDetail.refreshLayout();
                 }
                 // mobile
                 else {
-                    Log.d("film list", "new activity detail");
+                    Logger.log("film list", "new activity detail");
 
 
                     Intent intent = new Intent(getActivity(), FilmDetailFragmentActivity.class);

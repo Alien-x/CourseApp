@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // film detail on right side (tablet)
         if(isTablet()) {
-            Log.d("screen", "tablet");
+            Logger.log("screen", "tablet");
             FragmentFilmDetail fragmentFilmDetail = new FragmentFilmDetail();
             fragmentFilmList.setFragmentFilmDetail(fragmentFilmDetail);
 

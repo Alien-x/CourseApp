@@ -1,23 +1,80 @@
+// versioning
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+def versionBuild = 0
+
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
 
+    // apk file name versioning
+    applicationVariants.all { variant ->
+
+        def baseName = "$project.name-$variant.name-$variant.versionName"
+        def fileName = baseName + "-${variant.versionCode}.apk"
+        if(variant.buildType.name == "release") {
+            fileName = baseName + ".apk"
+        }
+
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    fileName)
+        }
+    }
+
+    // app signing
+    // constants below are saved in gradle.properties
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
     defaultConfig {
         applicationId "cz.muni.fi.pv256.uco374366"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+
+
+        resConfigs "cs", "en" // resourses only for this langs
+        resConfigs "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"
+
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+
+
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+        }
+
+
+    }
+
+    productFlavors {
+        primary {
+            buildConfigField "boolean", "logging", "false"
+        }
+
+        secondary {
+            applicationId "cz.muni.fi.pv256.uco374366_secondary"
+            buildConfigField "boolean", "logging", "true"
         }
     }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

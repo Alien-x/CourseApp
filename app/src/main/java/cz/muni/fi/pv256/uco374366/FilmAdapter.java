@@ -1,7 +1,6 @@
 package cz.muni.fi.pv256.uco374366;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,9 +80,9 @@ public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleA
             ViewHolder holder = new ViewHolder();
             holder.cover = (ImageView) convertView.findViewById(R.id.cover);
             convertView.setTag(holder);
-            Log.d("viewholder", "inflate pozice " + position);
+            Logger.log("viewholder", "inflate pozice " + position);
         } else {
-            Log.d("viewholder", "recyklace pozice " + position);
+            Logger.log("viewholder", "recyklace pozice " + position);
         }
 
         ViewHolder holder = (ViewHolder) convertView.getTag();

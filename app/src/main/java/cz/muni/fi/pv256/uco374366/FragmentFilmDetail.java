@@ -22,7 +22,7 @@ public class FragmentFilmDetail extends Fragment{
 
     public void refreshLayout() {
 
-        Log.d("film detail", "refreshLayout");
+        Logger.log("film detail", "refreshLayout");
 
         // set film info
         if(mView != null && mFilm != null) {
@@ -39,7 +39,7 @@ public class FragmentFilmDetail extends Fragment{
             imageViewBackground.setImageResource(mFilm.getCoverResource());
         }
         else {
-            Log.d("film detail", "could not refresh");
+            Logger.log("film detail", "could not refresh");
         }
     }
 
