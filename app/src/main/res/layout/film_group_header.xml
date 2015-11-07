@@ -9,5 +9,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/film_group_header"
-        android:layout_gravity="center_horizontal"/>
+        android:gravity="left"
+        android:text="Film Group Header"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>

@@ -8,6 +8,8 @@ import android.os.Parcelable;
  */
 public class Film implements Parcelable {
 
+    private static long sIDcounter = 0;
+
     private long mReleaseDay;
     private String mCoverPath;
     private String mTitle;
@@ -16,19 +18,20 @@ public class Film implements Parcelable {
 
 
 
+
     private long mHeader;
 
 
-    public Film(long ID, long header, String title, long releaseDay, String coverPath) {
-        mID = ID;
+    public Film(long header, String title, long releaseDay, String coverPath) {
+        mID = sIDcounter++;
         mHeader = header;
         mTitle = title;
         mReleaseDay = releaseDay;
         mCoverPath = coverPath;
     }
 
-    public Film(long ID, long header, String title, long releaseDay, int coverResource) {
-        mID = ID;
+    public Film(long header, String title, long releaseDay, int coverResource) {
+        mID = sIDcounter++;
         mHeader = header;
         mTitle = title;
         mReleaseDay = releaseDay;

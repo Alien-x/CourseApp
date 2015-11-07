@@ -36,14 +36,16 @@ public class FragmentFilmList extends Fragment {
 
         if(isOnline()) {
             // fake data
-            mFilms.add(new Film(1, 1, "Alien vs. Predator", 0, R.drawable.avp));
-            mFilms.add(new Film(2, 1, "American Pie", 0, R.drawable.american_pie));
-            mFilms.add(new Film(3, 1, "Rocky", 0, R.drawable.rocky));
-            mFilms.add(new Film(4, 2, "How to train your dragon", 0, R.drawable.dragon));
-            mFilms.add(new Film(5, 2, "Starship troopers", 0, R.drawable.starship_troopers));
+            mFilms.add(new Film(1, "Alien vs. Predator", 0, R.drawable.avp));
+            mFilms.add(new Film(1, "American Pie", 0, R.drawable.american_pie));
+            mFilms.add(new Film(1, "Alien vs. Predator", 0, R.drawable.avp));
+            mFilms.add(new Film(1, "Rocky", 0, R.drawable.rocky));
+            mFilms.add(new Film(2, "How to train your dragon", 0, R.drawable.dragon));
 
-            mHeaders.append(1, "In Theaters Now");
-            mHeaders.append(2, "Most Popular");
+
+
+            mHeaders.append(1, getActivity().getResources().getString(R.string.film_group_theatres));
+            mHeaders.append(2, getActivity().getResources().getString(R.string.film_group_popular));
 
             gridview.setEmptyView(view.findViewById(R.id.emptyView));
             gridview.setAdapter(new FilmAdapter(getActivity().getApplicationContext(), mFilms, mHeaders));

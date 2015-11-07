@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CourseApp</string>
+
+    <string name="action_settings">Nastavení</string>
+
+    <string name="films_empty">Nenalezeny žádné filmy.</string>
+    <string name="no_network">Bez internetového připojení.</string>
+
+
+    <string name="film_title">Název filmu</string>
+    <string name="film_release_date">Datum vydání</string>
+    <string name="film_group_theatres">Právě v kinech</string>
+    <string name="film_group_popular">Populární</string>
+
+</resources>

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         // film list
         FragmentFilmList fragmentFilmList = new FragmentFilmList();
 
-        fragmentTransaction.add(R.id.film_list_fragment, fragmentFilmList, "FILM_LIST_FRAGMENT");
+        fragmentTransaction.replace(R.id.film_list_fragment, fragmentFilmList, "FILM_LIST_FRAGMENT");
 
         // film detail on right side (tablet)
         if(isTablet()) {

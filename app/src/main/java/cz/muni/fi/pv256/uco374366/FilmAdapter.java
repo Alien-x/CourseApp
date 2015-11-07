@@ -24,11 +24,11 @@ public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleA
     private Context mContext;
     private List<Film> mFilms;
     private LongSparseArray<String> mHeaders;
-    private LayoutInflater mInflater;
+    //private LayoutInflater mInflater;
 
     public FilmAdapter(Context context, List<Film> films, LongSparseArray<String> headers) {
         mContext = context;
-        mInflater = LayoutInflater.from(context);
+        //mInflater = LayoutInflater.from(context);
 
         // film list
         if(films != null) {
