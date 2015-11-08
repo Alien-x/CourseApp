@@ -16,6 +16,11 @@ public class FilmDetailFragmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if(BuildConfig.secondary) {
+            setTheme(R.style.AppTheme_Secondary);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_detail);
 

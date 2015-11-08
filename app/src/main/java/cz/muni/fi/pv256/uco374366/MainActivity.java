@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -16,8 +17,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if(BuildConfig.secondary) {
+            setTheme(R.style.AppTheme_Secondary);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -33,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
             Logger.log("screen", "tablet");
             FragmentFilmDetail fragmentFilmDetail = new FragmentFilmDetail();
             fragmentFilmList.setFragmentFilmDetail(fragmentFilmDetail);
+
+            // film list margin
+            ViewGroup.LayoutParams lp = ((ViewGroup) findViewById(R.id.film_list_fragment)).getLayoutParams();
+            if( lp instanceof ViewGroup.MarginLayoutParams)
+            {
+                ((ViewGroup.MarginLayoutParams) lp).rightMargin = 5;
+            }
+
+
 
             fragmentTransaction.add(R.id.film_detail_fragment, fragmentFilmDetail, "FILM_DETAIL_FRAGMENT");
         }

@@ -66,11 +66,13 @@ android {
     productFlavors {
         primary {
             buildConfigField "boolean", "logging", "false"
+            buildConfigField "boolean", "secondary", "false"
         }
 
         secondary {
             applicationId "cz.muni.fi.pv256.uco374366_secondary"
             buildConfigField "boolean", "logging", "true"
+            buildConfigField "boolean", "secondary", "true"
         }
     }
 }

@@ -38,8 +38,13 @@ public class FragmentFilmList extends Fragment {
             // fake data
             mFilms.add(new Film(1, "Alien vs. Predator", 0, R.drawable.avp));
             mFilms.add(new Film(1, "American Pie", 0, R.drawable.american_pie));
+            mFilms.add(new Film(1, "Starship Troopers", 0, R.drawable.starship_troopers));
             mFilms.add(new Film(1, "Alien vs. Predator", 0, R.drawable.avp));
-            mFilms.add(new Film(1, "Rocky", 0, R.drawable.rocky));
+            mFilms.add(new Film(1, "American Pie", 0, R.drawable.american_pie));
+            mFilms.add(new Film(1, "Starship Troopers", 0, R.drawable.starship_troopers));mFilms.add(new Film(1, "Alien vs. Predator", 0, R.drawable.avp));
+            mFilms.add(new Film(1, "American Pie", 0, R.drawable.american_pie));
+            mFilms.add(new Film(1, "Starship Troopers", 0, R.drawable.starship_troopers));
+            mFilms.add(new Film(2, "Rocky", 0, R.drawable.rocky));
             mFilms.add(new Film(2, "How to train your dragon", 0, R.drawable.dragon));
 
 
