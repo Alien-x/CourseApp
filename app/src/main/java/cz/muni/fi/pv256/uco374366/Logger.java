@@ -8,9 +8,9 @@ import android.util.Log;
 public class Logger {
 
     public static final void log(String tag, String msg) {
-        if(BuildConfig.logging) {
-            Log.i(tag, msg);
-        }
+        //if(BuildConfig.logging) {
+            Log.i("logger:"+tag, msg);
+        //}
     }
 
 }

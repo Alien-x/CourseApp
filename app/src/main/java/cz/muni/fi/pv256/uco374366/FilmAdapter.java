@@ -86,13 +86,13 @@ public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleA
         }
 
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        holder.cover.setImageResource(mFilms.get(position).getCoverResource());                   // mFilms.get(position).getCoverPath()
+        //holder.cover.setImageResource(mFilms.get(position).getCoverResource());                   // mFilms.get(position).getCoverPath()
         return convertView;
     }
 
     @Override
     public long getHeaderId(int position) {
-        return mFilms.get(position).getHeader();
+        return mFilms.get(position).getGroup();
     }
 
     @Override

@@ -3,97 +3,72 @@ package cz.muni.fi.pv256.uco374366.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 /**
  * Created by Z on 18. 10. 2015.
  */
 public class Film implements Parcelable {
 
-    private static long sIDcounter = 0;
-
-    private long mReleaseDay;
-    private String mCoverPath;
-    private String mTitle;
-    private int mCoverResource;
     private long mID;
+    private int mGroup;
 
+    private String mTitle;
+    private String mOverview;
+    private String mReleaseDate;
+    private String mPosterPath;
+    private String mBackdropPath;
 
-
-
-    private long mHeader;
-
-
-    public Film(long header, String title, long releaseDay, String coverPath) {
-        mID = sIDcounter++;
-        mHeader = header;
+    public Film(long id, int group, String title, String overview, String releaseDate,
+                String posterPath, String backdropPath) {
+        mID = id;
+        mGroup = group;
         mTitle = title;
-        mReleaseDay = releaseDay;
-        mCoverPath = coverPath;
+        mOverview = overview;
+        mReleaseDate = releaseDate;
+        mPosterPath = posterPath;
+        mBackdropPath = backdropPath;
     }
 
-    public Film(long header, String title, long releaseDay, int coverResource) {
-        mID = sIDcounter++;
-        mHeader = header;
-        mTitle = title;
-        mReleaseDay = releaseDay;
-        mCoverResource = coverResource;
-    }
 
     public long getID() {
         return mID;
     }
 
-    public void setID(int ID) {
-        mID = ID;
-    }
-
-    public long getHeader() {
-        return mHeader;
-    }
-
-    public void setHeader(long header) {
-        mHeader = header;
-    }
-
-    public void setReleaseDay(long releaseDay) {
-        mReleaseDay = releaseDay;
-    }
-
-    public void setCoverPath(String coverPath) {
-        mCoverPath = coverPath;
-    }
-
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
-    public void setCoverResource(int coverResource) {
-        mCoverResource = coverResource;
-    }
-
-    public long getReleaseDay() {
-        return mReleaseDay;
-    }
-
-    public String getCoverPath() {
-        return mCoverPath;
+    public long getGroup() {
+        return mGroup;
     }
 
     public String getTitle() {
         return mTitle;
     }
 
-    public int getCoverResource() {
-        return mCoverResource;
+    public String getOverview() {
+        return mOverview;
     }
+
+    public String getReleaseDay() {
+        return mReleaseDate;
+    }
+
+    public String getPosterPath() {
+        return mPosterPath;
+    }
+
+    public String getBackdropPath() {
+        return mBackdropPath;
+    }
+
+
 
     @Override
     public String toString() {
-        return mTitle + " (" + mReleaseDay + ")";
+        return "#" + mID + " : " + mTitle;
     }
 
     @Override
     public int hashCode() {
-        return (int)mReleaseDay * 47 + mTitle.hashCode();
+        return (int)mID;
     }
 
     /* PARCELABLE */
@@ -104,10 +79,12 @@ public class Film implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mCoverPath);
+        dest.writeLong(mID);
         dest.writeString(mTitle);
-        dest.writeInt(mCoverResource);
-        dest.writeLong(mReleaseDay);
+        dest.writeString(mOverview);
+        dest.writeString(mReleaseDate);
+        dest.writeString(mPosterPath);
+        dest.writeString(mBackdropPath);
     }
 
     public static final Parcelable.Creator<Film> CREATOR = new Parcelable.Creator<Film>() {
@@ -121,9 +98,11 @@ public class Film implements Parcelable {
     };
 
     private Film(Parcel in) {
-        mCoverPath = in.readString();
+        mID = in.readLong();
         mTitle = in.readString();
-        mCoverResource = in.readInt();
-        mReleaseDay = in.readLong();
+        mOverview = in.readString();
+        mReleaseDate = in.readString();
+        mPosterPath = in.readString();
+        mBackdropPath = in.readString();
     }
 }

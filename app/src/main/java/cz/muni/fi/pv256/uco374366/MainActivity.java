@@ -13,10 +13,21 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.muni.fi.pv256.uco374366.Model.Film;
+
+import cz.muni.fi.pv256.uco374366.Model.Film;
+
 public class MainActivity extends AppCompatActivity {
+
+    private List<Film> mFilms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Logger.log("MainActivity", "onCreate");
 
         if(BuildConfig.secondary) {
             setTheme(R.style.AppTheme_Secondary);
@@ -32,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         // film list
         FragmentFilmList fragmentFilmList = new FragmentFilmList();
+        fragmentFilmList.loadFilms(mFilms);
 
         fragmentTransaction.replace(R.id.film_list_fragment, fragmentFilmList, "FILM_LIST_FRAGMENT");
 
@@ -47,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 ((ViewGroup.MarginLayoutParams) lp).rightMargin = 5;
             }
-
-
 
             fragmentTransaction.add(R.id.film_detail_fragment, fragmentFilmDetail, "FILM_DETAIL_FRAGMENT");
         }

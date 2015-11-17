@@ -11,5 +11,8 @@
     <string name="film_release_date">Datum vydání</string>
     <string name="film_group_theatres">Právě v kinech</string>
     <string name="film_group_popular">Populární</string>
+    <string name="loading">Načítání...</string>
+    <string name="film_group_most_popular">Nejpopulárnější</string>
+    <string name="film_group_highest_rated">Nejlépe hodnocené</string>
 
 </resources>

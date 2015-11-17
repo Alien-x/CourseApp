@@ -25,20 +25,19 @@ public class FragmentFilmDetail extends Fragment{
         Logger.log("film detail", "refreshLayout");
 
         // set film info
-        if(mView != null && mFilm != null) {
+        if (mView != null && mFilm != null) {
             TextView textViewTitle = (TextView) mView.findViewById(R.id.title);
             textViewTitle.setText(mFilm.getTitle());
 
             TextView textViewReleaseDate = (TextView) mView.findViewById(R.id.releaseDate);
-            textViewReleaseDate.setText(Long.toString(mFilm.getReleaseDay()));
+            textViewReleaseDate.setText(mFilm.getReleaseDay());
 
-            ImageView imageViewCover = (ImageView) mView.findViewById(R.id.cover);
-            imageViewCover.setImageResource(mFilm.getCoverResource());
+            //ImageView imageViewCover = (ImageView) mView.findViewById(R.id.cover);
+            //imageViewCover.setImageResource(mFilm.getCoverResource());
 
-            ImageView imageViewBackground = (ImageView) mView.findViewById(R.id.background);
-            imageViewBackground.setImageResource(mFilm.getCoverResource());
-        }
-        else {
+            //ImageView imageViewBackground = (ImageView) mView.findViewById(R.id.background);
+            //imageViewBackground.setImageResource(mFilm.getCoverResource());
+        } else {
             Logger.log("film detail", "could not refresh");
         }
     }

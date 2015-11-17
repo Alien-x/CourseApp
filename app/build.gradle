@@ -26,6 +26,8 @@ android {
         }
     }
 
+
+
     // app signing
     // constants below are saved in gradle.properties
     signingConfigs {
@@ -49,12 +51,13 @@ android {
         versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
 
-
+        buildConfigField "String", "tmd_api_key", TMD_API_KEY
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             signingConfig signingConfigs.release
+            defaultConfig.versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         }
 
         debug {
@@ -83,4 +86,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:22.2.0'
     compile 'com.tonicartos:stickygridheaders:1.0.1'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.google.code.gson:gson:2.2.4'
 }
