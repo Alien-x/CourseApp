@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.support.v4.util.LongSparseArray;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ import cz.muni.fi.pv256.uco374366.Model.Film;
  * Created by Z on 18. 10. 2015.
  */
 public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
+
+    private static final String TMD_POSTER_URL = "http://image.tmdb.org/t/p/w150/";
 
     private Context mContext;
     private List<Film> mFilms;
@@ -68,9 +73,26 @@ public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleA
     }
 
     private static class ViewHolder {
-        ImageView cover;
+        ImageView poster;
     }
 
+    private class ImageLoadedCallback implements Callback {
+        TextView textViewTitle;
+
+        public  ImageLoadedCallback(TextView textView){
+            textViewTitle = textView;
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError() {
+
+        }
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -78,15 +100,29 @@ public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleA
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.film_item, parent, false);
             ViewHolder holder = new ViewHolder();
-            holder.cover = (ImageView) convertView.findViewById(R.id.cover);
+            holder.poster = (ImageView) convertView.findViewById(R.id.poster);
             convertView.setTag(holder);
             Logger.log("viewholder", "inflate pozice " + position);
         } else {
             Logger.log("viewholder", "recyklace pozice " + position);
         }
 
+        TextView textViewTitle = (TextView) convertView.findViewById(R.id.title);
+        textViewTitle.setVisibility(View.VISIBLE);
+        textViewTitle.setText(mFilms.get(position).getTitle());
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        //holder.cover.setImageResource(mFilms.get(position).getCoverResource());                   // mFilms.get(position).getCoverPath()
+        Picasso
+                .with(convertView.getContext())
+                .load(TMD_POSTER_URL + mFilms.get(position).getPosterPath())
+                .into(holder.poster, new ImageLoadedCallback(textViewTitle) {
+                    @Override
+                    public void onSuccess() {
+                        if (this.textViewTitle != null) {
+                            this.textViewTitle.setVisibility(View.GONE);
+                        }
+                    }
+                });
+        // mFilms.get(position).getCoverPath()
         return convertView;
     }
 

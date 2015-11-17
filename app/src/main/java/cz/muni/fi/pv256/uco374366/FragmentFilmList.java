@@ -20,7 +20,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import cz.muni.fi.pv256.uco374366.Model.Film;
@@ -147,6 +146,7 @@ public class FragmentFilmList extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 if (mGridview != null) {
                                     mGridview.setEmptyView(mView.findViewById(R.id.loading));
                                 }

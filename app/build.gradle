@@ -88,4 +88,5 @@ dependencies {
     compile 'com.tonicartos:stickygridheaders:1.0.1'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
