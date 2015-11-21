@@ -14,5 +14,6 @@
     <string name="loading">Načítání...</string>
     <string name="film_group_most_popular">Nejpopulárnější</string>
     <string name="film_group_highest_rated">Nejlépe hodnocené</string>
+    <string name="film_group_in_theaters">In Theaters</string>
 
 </resources>

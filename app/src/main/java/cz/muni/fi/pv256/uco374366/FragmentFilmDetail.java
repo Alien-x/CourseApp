@@ -57,27 +57,37 @@ public class FragmentFilmDetail extends Fragment{
             textViewReleaseDate.setText(mFilm.getReleaseDay());
 
             ImageView imageViewPoster = (ImageView) mView.findViewById(R.id.poster);
-            Picasso
-                .with(getActivity().getApplicationContext())
+            if(mFilm.getPosterPath() == null) {
+                imageViewPoster.setVisibility(View.GONE);
+            }
+            else {
+                Picasso
+                    .with(getActivity().getApplicationContext())
                     .load(TMD_POSTER_URL + mFilm.getPosterPath())
-                .into(imageViewPoster);
+                    .into(imageViewPoster);
+            }
 
 
 
             ProgressBar progressBar = (ProgressBar) mView.findViewById(R.id.progressBar);
             progressBar.setVisibility(View.VISIBLE);
             ImageView imageViewBackdrop = (ImageView) mView.findViewById(R.id.backdrop);
-            Picasso
-                    .with(getActivity().getApplicationContext())
-                    .load(TMD_BACKDROP_URL + mFilm.getBackdropPath())
-                    .into(imageViewBackdrop, new ImageLoadedCallback(progressBar) {
-                        @Override
-                        public void onSuccess() {
-                            if (this.progressBar != null) {
-                                this.progressBar.setVisibility(View.GONE);
+            if(mFilm.getBackdropPath() == null) {
+                imageViewBackdrop.setImageResource(R.drawable.no_backdrop);
+            }
+            else {
+                Picasso
+                        .with(getActivity().getApplicationContext())
+                        .load(TMD_BACKDROP_URL + mFilm.getBackdropPath())
+                        .into(imageViewBackdrop, new ImageLoadedCallback(progressBar) {
+                            @Override
+                            public void onSuccess() {
+                                if (this.progressBar != null) {
+                                    this.progressBar.setVisibility(View.GONE);
+                                }
                             }
-                        }
-                    });
+                        });
+            }
 
         } else {
             Logger.log("film detail", "could not refresh");

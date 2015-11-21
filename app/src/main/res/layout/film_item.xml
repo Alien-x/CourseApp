@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:id="@+id/poster"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -14,14 +21,12 @@
         android:visibility="gone"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/poster"
+        android:layout_alignTop="@id/poster"
+        android:layout_alignRight="@id/poster"
+        android:layout_alignBottom="@id/poster"
         android:layout_margin="10dp"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:id="@+id/poster"
-        android:background="@android:color/holo_blue_bright"/>
 
-</LinearLayout>
+
+</RelativeLayout>

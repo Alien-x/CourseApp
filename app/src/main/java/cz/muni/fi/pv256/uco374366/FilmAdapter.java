@@ -111,17 +111,22 @@ public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleA
         textViewTitle.setVisibility(View.VISIBLE);
         textViewTitle.setText(mFilms.get(position).getTitle());
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        Picasso
-                .with(convertView.getContext())
-                .load(TMD_POSTER_URL + mFilms.get(position).getPosterPath())
-                .into(holder.poster, new ImageLoadedCallback(textViewTitle) {
-                    @Override
-                    public void onSuccess() {
-                        if (this.textViewTitle != null) {
-                            this.textViewTitle.setVisibility(View.GONE);
+        if(mFilms.get(position).getPosterPath() == null) {
+            holder.poster.setImageResource(R.drawable.no_poster);
+        }
+        else {
+            Picasso
+                    .with(convertView.getContext())
+                    .load(TMD_POSTER_URL + mFilms.get(position).getPosterPath())
+                    .into(holder.poster, new ImageLoadedCallback(textViewTitle) {
+                        @Override
+                        public void onSuccess() {
+                            if (this.textViewTitle != null) {
+                                this.textViewTitle.setVisibility(View.GONE);
+                            }
                         }
-                    }
-                });
+                    });
+        }
         // mFilms.get(position).getCoverPath()
         return convertView;
     }

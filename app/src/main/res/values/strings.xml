@@ -14,5 +14,6 @@
     <string name="loading">Loading...</string>
     <string name="film_group_most_popular">Most popular</string>
     <string name="film_group_highest_rated">Highest rated</string>
+    <string name="film_group_in_theaters">In Theaters</string>
 
 </resources>
