@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
                     android:clickable="true"
-                    android:src="@drawable/button_plus"
+                    android:src="@drawable/button_favourite_empty"
                     app:layout_anchor="@id/backdrop"
                     app:layout_anchorGravity="bottom|right|end"
                     android:layout_marginTop="0dp"
@@ -65,8 +65,9 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="-50dp"
-                android:layout_marginLeft="30dp">
+                android:layout_marginTop="-100dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
                 <ImageView
                     android:layout_width="120dp"
@@ -80,7 +81,8 @@
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp">
+                    android:layout_marginTop="100dp"
+                    android:id="@+id/layoutTitle">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -90,24 +92,33 @@
                         android:id="@+id/title"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="5dp"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/film_release_date"
                         android:id="@+id/releaseDate"
                         android:layout_below="@+id/title"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"/>
+                        />
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/film_description"
+                android:id="@+id/description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"/>
 
 
         </LinearLayout>

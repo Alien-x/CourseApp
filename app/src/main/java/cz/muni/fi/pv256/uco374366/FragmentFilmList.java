@@ -1,7 +1,10 @@
 package cz.muni.fi.pv256.uco374366;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -123,8 +126,8 @@ public class FragmentFilmList extends Fragment {
 
         mFilms = films;
 
-        getSpecificFilms(URL_MOST_POPULAR, GROUP_MOST_POPULAR);
         getSpecificFilms(URL_IN_THEATERS, GROUP_IN_THEATERS);
+        getSpecificFilms(URL_MOST_POPULAR, GROUP_MOST_POPULAR);
     }
 
     class FilmCallback implements Callback {
@@ -228,8 +231,8 @@ public class FragmentFilmList extends Fragment {
 
 
     private boolean isOnline() {
-        /*ConnectivityManager cm =
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        /*ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();*/
         return true;

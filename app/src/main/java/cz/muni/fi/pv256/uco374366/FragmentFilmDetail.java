@@ -56,6 +56,9 @@ public class FragmentFilmDetail extends Fragment{
             TextView textViewReleaseDate = (TextView) mView.findViewById(R.id.releaseDate);
             textViewReleaseDate.setText(mFilm.getReleaseDay());
 
+            TextView textViewDescription = (TextView) mView.findViewById(R.id.description);
+            textViewDescription.setText(mFilm.getOverview());
+
             ImageView imageViewPoster = (ImageView) mView.findViewById(R.id.poster);
             if(mFilm.getPosterPath() == null) {
                 imageViewPoster.setVisibility(View.GONE);

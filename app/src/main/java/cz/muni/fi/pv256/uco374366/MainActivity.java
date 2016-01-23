@@ -3,6 +3,7 @@ package cz.muni.fi.pv256.uco374366;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         fragmentTransaction.commit();
+
     }
 
     private void setFrameLayoutWeight(FrameLayout frameLayout, float weight) {
