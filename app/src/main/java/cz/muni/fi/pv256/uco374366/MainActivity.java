@@ -1,29 +1,17 @@
 package cz.muni.fi.pv256.uco374366;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cz.muni.fi.pv256.uco374366.Model.Film;
-
-import cz.muni.fi.pv256.uco374366.Model.Film;
 
 public class MainActivity extends AppCompatActivity {
-
-    private List<Film> mFilms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         // film list
         FragmentFilmList fragmentFilmList = new FragmentFilmList();
-        fragmentFilmList.loadFilms(mFilms);
 
         fragmentTransaction.replace(R.id.film_list_fragment, fragmentFilmList, "FILM_LIST_FRAGMENT");
 
@@ -66,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
             setFrameLayoutWeight((FrameLayout) findViewById(R.id.film_detail_fragment), 0.0f);
         }
 
-
         fragmentTransaction.commit();
-
     }
 
     private void setFrameLayoutWeight(FrameLayout frameLayout, float weight) {
@@ -102,5 +87,4 @@ public class MainActivity extends AppCompatActivity {
     public boolean isTablet() {
         return  getResources().getBoolean(R.bool.isTablet);
     }
-
 }
