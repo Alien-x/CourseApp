@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
+import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
+import cz.muni.fi.pv256.uco374366.Misc.Logger;
+
 
 public class MainActivity extends AppCompatActivity {
 

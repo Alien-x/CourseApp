@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FilmListJson {
+public class FilmListGson {
 
     @SerializedName("results")
-    public List<FilmJson> films;
+    public List<FilmGson> films;
 }

@@ -1,10 +1,7 @@
-package cz.muni.fi.pv256.uco374366;
+package cz.muni.fi.pv256.uco374366.Fragment;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,16 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.support.v4.util.LongSparseArray;
 
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.muni.fi.pv256.uco374366.Misc.FilmAdapter;
+import cz.muni.fi.pv256.uco374366.FilmDetailFragmentAsActivity;
+import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
 
+import cz.muni.fi.pv256.uco374366.R;
 import cz.muni.fi.pv256.uco374366.Service.DownloadService;
 import cz.muni.fi.pv256.uco374366.Service.DownloadServiceReceiver;
 
@@ -119,7 +119,7 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
                 // mobile
                 else {
                     Logger.log("film_list", "new activity detail");
-                    Intent intent = new Intent(getActivity(), FilmDetailFragmentActivity.class);
+                    Intent intent = new Intent(getActivity(), FilmDetailFragmentAsActivity.class);
                     intent.putExtra("FILM", mFilms.get(position));
                     startActivity(intent);
                 }

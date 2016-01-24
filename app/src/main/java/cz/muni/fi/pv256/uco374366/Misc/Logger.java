@@ -1,4 +1,4 @@
-package cz.muni.fi.pv256.uco374366;
+package cz.muni.fi.pv256.uco374366.Misc;
 
 import android.util.Log;
 

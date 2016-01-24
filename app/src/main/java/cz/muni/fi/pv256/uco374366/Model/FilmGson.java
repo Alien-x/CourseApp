@@ -3,7 +3,7 @@ package cz.muni.fi.pv256.uco374366.Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FilmJson {
+public class FilmGson {
 
     @SerializedName("id")
     public int id;

@@ -1,4 +1,4 @@
-package cz.muni.fi.pv256.uco374366;
+package cz.muni.fi.pv256.uco374366.Fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
+import cz.muni.fi.pv256.uco374366.R;
 
 public class FragmentFilmDetail extends Fragment{
 

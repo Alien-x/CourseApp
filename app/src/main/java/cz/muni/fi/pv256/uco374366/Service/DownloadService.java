@@ -15,10 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import cz.muni.fi.pv256.uco374366.FragmentFilmList;
-import cz.muni.fi.pv256.uco374366.Logger;
-import cz.muni.fi.pv256.uco374366.Model.FilmJson;
-import cz.muni.fi.pv256.uco374366.Model.FilmListJson;
+import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
+import cz.muni.fi.pv256.uco374366.Misc.Logger;
+import cz.muni.fi.pv256.uco374366.Model.FilmGson;
+import cz.muni.fi.pv256.uco374366.Model.FilmListGson;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.Call;
@@ -95,7 +95,7 @@ public class DownloadService extends IntentService {
                 .build();
 
         NetworkApi api = retrofit.create(NetworkApi.class);
-        Call<FilmListJson> call;
+        Call<FilmListGson> call;
 
         switch(group) {
             case FragmentFilmList.GROUP_MOST_POPULAR:
@@ -111,31 +111,31 @@ public class DownloadService extends IntentService {
 
 
 
-        FilmListJson filmsJson = call.execute().body();
+        FilmListGson filmsJson = call.execute().body();
 
         SimpleDateFormat dateFormater = new SimpleDateFormat(Url.DATE_FORMAT);
         Locale locale = Locale.getDefault();
 
         ArrayList<Film> films = new ArrayList<>();
 
-        for (FilmJson filmJson : filmsJson.films) {
+        for (FilmGson filmGson : filmsJson.films) {
 
             String releaseDate = null;
             try {
                 releaseDate = SimpleDateFormat
                         .getDateInstance(SimpleDateFormat.LONG, locale)
-                        .format(dateFormater.parse(filmJson.release_date));
+                        .format(dateFormater.parse(filmGson.release_date));
             }
             catch(Exception e) {}
 
             films.add(new Film(
-                    filmJson.id,
+                    filmGson.id,
                     group,
-                    filmJson.title,
-                    filmJson.overview,
+                    filmGson.title,
+                    filmGson.overview,
                     releaseDate,
-                    filmJson.poster_path,
-                    filmJson.backdrop_path
+                    filmGson.poster_path,
+                    filmGson.backdrop_path
             ));
 
         }

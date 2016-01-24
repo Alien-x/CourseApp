@@ -1,4 +1,4 @@
-package cz.muni.fi.pv256.uco374366;
+package cz.muni.fi.pv256.uco374366.Misc;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.support.v4.util.LongSparseArray;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
@@ -17,7 +16,9 @@ import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
+import cz.muni.fi.pv256.uco374366.R;
 
 /**
  * Created by Z on 18. 10. 2015.
