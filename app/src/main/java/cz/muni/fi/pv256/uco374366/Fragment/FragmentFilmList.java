@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.support.v4.util.LongSparseArray;
+import android.widget.Toast;
 
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.muni.fi.pv256.uco374366.Database.FilmDatabase;
 import cz.muni.fi.pv256.uco374366.Misc.FilmAdapter;
 import cz.muni.fi.pv256.uco374366.FilmDetailFragmentAsActivity;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
@@ -33,65 +35,52 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
     private List<Film> mFilms = new ArrayList<>();
 
     private LongSparseArray<String> mHeaders = new LongSparseArray<>();
+    public static final int GROUP_FAVOURITES = 0;
     public static final int GROUP_MOST_POPULAR = 1;
     public static final int GROUP_IN_THEATERS = 2;
 
     private FilmAdapter mFilmAdapter = null;
     private GridView mGridView = null;
     private View mView = null;
+    private int mSource = R.id.action_discover;
+
+    private FilmDatabase mDatabase = null;
+
+
+    public void setSource(int source) {
+        mSource = source;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Starting Download Service
-        mReceiver = new DownloadServiceReceiver(new Handler());
-        mReceiver.setReceiver(this);
-        Intent intent = new Intent(Intent.ACTION_SYNC, null, getActivity(), DownloadService.class);
+        // download from net
+        if(mSource == R.id.action_discover) {
 
-        // Send optional extras to Download IntentService
-        intent.putExtra("receiver", mReceiver);
-        intent.putExtra("groups", new int[] {
-            GROUP_IN_THEATERS,
-            GROUP_MOST_POPULAR
-        });
+            // Starting Download Service
+            mReceiver = new DownloadServiceReceiver(new Handler());
+            mReceiver.setReceiver(this);
+            Intent intent = new Intent(Intent.ACTION_SYNC, null, getActivity(), DownloadService.class);
 
-        mHeaders.append(GROUP_IN_THEATERS, getActivity().getResources().getString(R.string.film_group_in_theaters));
-        mHeaders.append(GROUP_MOST_POPULAR, getActivity().getResources().getString(R.string.film_group_most_popular));
+            // Send optional extras to Download IntentService
+            intent.putExtra("receiver", mReceiver);
+            intent.putExtra("groups", new int[]{
+                    GROUP_IN_THEATERS,
+                    GROUP_MOST_POPULAR
+            });
 
-        getActivity().startService(intent);
-    }
+            mHeaders.append(GROUP_IN_THEATERS, getActivity().getResources().getString(R.string.film_group_in_theaters));
+            mHeaders.append(GROUP_MOST_POPULAR, getActivity().getResources().getString(R.string.film_group_most_popular));
 
-    @Override
-    public void onReceiveResult(int resultCode, Bundle resultData) {
-        switch (resultCode) {
-            case DownloadService.STATUS_RUNNING:
-                Logger.log("download_service", "STATUS_RUNNING");
-                break;
-            case DownloadService.STATUS_FINISHED:
-                /* Hide progress & extract result from bundle */
-                List<Film> downFilms = resultData.getParcelableArrayList("films");
-                mFilms.addAll(downFilms);
+            getActivity().startService(intent);
+        }
+        else if(mSource == R.id.action_favourites) {
 
-                if (mGridView != null) {
-                    mGridView.setEmptyView(mView.findViewById(R.id.loading));
-                    mFilmAdapter.notifyDataSetChanged();
-                }
+            mHeaders.append(GROUP_FAVOURITES, getActivity().getResources().getString(R.string.film_group_favourites));
 
-                // tablet
-                if (mFragmentFilmDetail != null) {
-                    Logger.log("film_list", "setting fragment detail (tablet)");
-                    mFragmentFilmDetail.setFilm(mFilms.get(0));
-                    mFragmentFilmDetail.refreshLayout();
-                }
-                /* Update ListView with result */
-                Logger.log("download_service", "STATUS_FINISHED");
-                break;
-            case DownloadService.STATUS_ERROR:
-                /* Handle the error */
-                String error = resultData.getString(Intent.EXTRA_TEXT);
-                Logger.log("download_service", "STATUS_ERROR: "+error);
-                break;
+            mDatabase = new FilmDatabase(getActivity());
+            setFilms(mDatabase.getAll());
         }
     }
 
@@ -155,6 +144,55 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();*/
         return true;
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case DownloadService.STATUS_RUNNING:
+                Logger.log("download_service", "STATUS_RUNNING");
+                break;
+            case DownloadService.STATUS_FINISHED:
+                /* Hide progress & extract result from bundle */
+                List<Film> downFilms = resultData.getParcelableArrayList("films");
+                setFilms(downFilms);
+                /* Update ListView with result */
+                Logger.log("download_service", "STATUS_FINISHED");
+                break;
+            case DownloadService.STATUS_ERROR:
+                /* Handle the error */
+                String error = resultData.getString(Intent.EXTRA_TEXT);
+
+                if (mGridView != null) {
+                    mGridView.setEmptyView(mView.findViewById(R.id.noConnectionView));
+                }
+
+                Toast.makeText(getActivity(), R.string.download_error, Toast.LENGTH_LONG).show();
+                Logger.log("download_service", "STATUS_ERROR: "+error);
+                break;
+        }
+    }
+
+    private void setFilms(List<Film> films) {
+
+        Logger.log("favourite", "setFilms");
+
+        mFilms.clear();
+        if(!films.isEmpty()) {
+            mFilms.addAll(films);
+        }
+
+        if (mGridView != null) {
+            mGridView.setEmptyView(mView.findViewById(R.id.noConnectionView));
+            mFilmAdapter.notifyDataSetChanged();
+        }
+
+        // tablet
+        if (mFragmentFilmDetail != null && !mFilms.isEmpty()) {
+            Logger.log("film_list", "setting fragment detail (tablet)");
+            mFragmentFilmDetail.setFilm(mFilms.get(0));
+            mFragmentFilmDetail.refreshLayout();
+        }
     }
 
     @Override

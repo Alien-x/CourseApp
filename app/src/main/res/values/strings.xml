@@ -5,7 +5,10 @@
 
     <string name="films_empty">No films found.</string>
     <string name="no_network">No internet connection.</string>
+    <string name="download_error">Error occurred when downloading.</string>
 
+    <string name="favourite_add">Added to favourites.</string>
+    <string name="favourite_remove">Removed from favourites.</string>
 
     <string name="film_title">Film title</string>
     <string name="film_release_date">Release date</string>
@@ -16,5 +19,8 @@
     <string name="film_group_highest_rated">Highest rated</string>
     <string name="film_group_in_theaters">In Theaters</string>
     <string name="film_description">Description</string>
+    <string name="action_discover">Discover</string>
+    <string name="action_favourites">Favourites</string>
+    <string name="film_group_favourites">Favourites</string>
 
 </resources>

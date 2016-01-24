@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
-import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
-import cz.muni.fi.pv256.uco374366.Misc.Logger;
+    import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
+    import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
+    import cz.muni.fi.pv256.uco374366.Misc.Logger;
 
 
-public class MainActivity extends AppCompatActivity {
+    public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +30,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setFragments(R.id.action_discover);
+    }
+
+    private void setFragments(int source) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         // film list
         FragmentFilmList fragmentFilmList = new FragmentFilmList();
+        fragmentFilmList.setSource(source);
 
         fragmentTransaction.replace(R.id.film_list_fragment, fragmentFilmList, "FILM_LIST_FRAGMENT");
 
@@ -75,14 +81,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(id == R.id.action_discover) {
+            Logger.log("action", "discover");
+            setFragments(R.id.action_discover);
+        }
+        else if(id == R.id.action_favourites) {
+            Logger.log("action", "favourites");
+            setFragments(R.id.action_favourites);
         }
 
         return super.onOptionsItemSelected(item);

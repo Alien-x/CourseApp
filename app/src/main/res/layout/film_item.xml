@@ -12,20 +12,20 @@
         android:id="@+id/poster"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/film_title"
-        android:textSize="14dp"
-        android:id="@+id/title"
-        android:visibility="gone"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@id/poster"
-        android:layout_alignTop="@id/poster"
-        android:layout_alignRight="@id/poster"
-        android:layout_alignBottom="@id/poster"
-        android:layout_margin="10dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="@string/film_title"
+    android:textSize="14dp"
+    android:id="@+id/title"
+    android:visibility="gone"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_alignLeft="@id/poster"
+    android:layout_alignTop="@id/poster"
+    android:layout_alignRight="@id/poster"
+    android:layout_alignBottom="@id/poster"
+    android:layout_margin="10dp"/>
 
 
 
