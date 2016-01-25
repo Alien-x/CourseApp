@@ -10,13 +10,19 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-    import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
-    import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
-    import cz.muni.fi.pv256.uco374366.Misc.Logger;
+import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
+import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
+import cz.muni.fi.pv256.uco374366.Misc.Logger;
 
 
-    public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
+    private static int mSource = R.id.action_discover;
+
+    public MainActivity() {
+        super();
+        Logger.log("MainActivity", "constructor");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +36,7 @@ import android.widget.LinearLayout;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setFragments(R.id.action_discover);
+        setFragments(mSource);
     }
 
     private void setFragments(int source) {
@@ -86,12 +92,15 @@ import android.widget.LinearLayout;
 
         if(id == R.id.action_discover) {
             Logger.log("action", "discover");
-            setFragments(R.id.action_discover);
+            mSource = R.id.action_discover;
         }
         else if(id == R.id.action_favourites) {
             Logger.log("action", "favourites");
-            setFragments(R.id.action_favourites);
+            mSource = R.id.action_favourites;
+
         }
+
+        setFragments(mSource);
 
         return super.onOptionsItemSelected(item);
     }

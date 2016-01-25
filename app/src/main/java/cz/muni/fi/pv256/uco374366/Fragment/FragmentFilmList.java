@@ -26,6 +26,7 @@ import cz.muni.fi.pv256.uco374366.Model.Film;
 import cz.muni.fi.pv256.uco374366.R;
 import cz.muni.fi.pv256.uco374366.Service.DownloadService;
 import cz.muni.fi.pv256.uco374366.Service.DownloadServiceReceiver;
+import cz.muni.fi.pv256.uco374366.Service.NetworkAvailability;
 
 public class FragmentFilmList extends Fragment implements DownloadServiceReceiver.Receiver {
 
@@ -42,6 +43,7 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
     private FilmAdapter mFilmAdapter = null;
     private GridView mGridView = null;
     private View mView = null;
+
     private int mSource = R.id.action_discover;
 
     private FilmDatabase mDatabase = null;
@@ -94,6 +96,12 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
         mGridView = (StickyGridHeadersGridView) mView.findViewById(R.id.gridViewFilms);
         mGridView.setAdapter(mFilmAdapter);
 
+        if (NetworkAvailability.isOnline(getActivity())) {
+            mGridView.setEmptyView(mView.findViewById(R.id.loading));
+        } else {
+            mGridView.setEmptyView(mView.findViewById(R.id.no_connection_view));
+        }
+
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -125,25 +133,11 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
             }
         });*/
 
-        if (isOnline()) {
-            mGridView.setEmptyView(mView.findViewById(R.id.loading));
-        } else {
-            mGridView.setEmptyView(mView.findViewById(R.id.noConnectionView));
-        }
-
         return mView;
     }
 
     public void setFragmentFilmDetail(FragmentFilmDetail fragmentFilmDetail) {
         mFragmentFilmDetail = fragmentFilmDetail;
-    }
-
-    private boolean isOnline() {
-
-        /*ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();*/
-        return true;
     }
 
     @Override
@@ -163,11 +157,9 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
                 /* Handle the error */
                 String error = resultData.getString(Intent.EXTRA_TEXT);
 
-                if (mGridView != null) {
-                    mGridView.setEmptyView(mView.findViewById(R.id.noConnectionView));
+                if(getActivity() != null) {
+                    Toast.makeText(getActivity(), R.string.download_error, Toast.LENGTH_LONG).show();
                 }
-
-                Toast.makeText(getActivity(), R.string.download_error, Toast.LENGTH_LONG).show();
                 Logger.log("download_service", "STATUS_ERROR: "+error);
                 break;
         }
@@ -183,7 +175,7 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
         }
 
         if (mGridView != null) {
-            mGridView.setEmptyView(mView.findViewById(R.id.noConnectionView));
+            mGridView.setEmptyView(mView.findViewById(R.id.empty_view));
             mFilmAdapter.notifyDataSetChanged();
         }
 
