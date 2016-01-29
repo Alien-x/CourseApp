@@ -1,4 +1,10 @@
 <resources>
+
+    <string name="app_id" translatable="false">uco374366</string>
+    <string name="content_authority" translatable="false">cz.muni.fi.pv256.uco374366</string>
+    <string name="account_type" translatable="false">PublicAccount</string>
+
+
     <string name="app_name">The movie database</string>
 
     <string name="action_settings">Settings</string>
@@ -7,20 +13,20 @@
     <string name="no_network">No internet connection.</string>
     <string name="download_error">Error occurred when downloading.</string>
 
+    <string name="action_favourites">Favourites</string>
+    <string name="film_group_favourites">Favourites</string>
     <string name="favourite_add">Added to favourites.</string>
     <string name="favourite_remove">Removed from favourites.</string>
 
     <string name="film_title">Film title</string>
     <string name="film_release_date">Release date</string>
-    <string name="film_group_theatres">In Theaters Now</string>
-    <string name="film_group_popular">Most Popular</string>
     <string name="loading">Loading...</string>
     <string name="film_group_most_popular">Most popular</string>
-    <string name="film_group_highest_rated">Highest rated</string>
     <string name="film_group_in_theaters">In Theaters</string>
     <string name="film_description">Description</string>
     <string name="action_discover">Discover</string>
-    <string name="action_favourites">Favourites</string>
-    <string name="film_group_favourites">Favourites</string>
+    <string name="action_refresh">Update favourites</string>
+    <string name="notification_text_1">Some films</string>
+    <string name="notification_text_2">were updated.</string>
 
 </resources>

@@ -71,7 +71,6 @@ public class FilmDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(FILM_ID, film.getID());
         values.put(FILM_TITLE, film.getTitle());
         values.put(FILM_RELEASE_DATE, film.getReleaseDay());
         values.put(FILM_OVERVIEW, film.getOverview());

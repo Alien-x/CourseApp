@@ -15,14 +15,14 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import cz.muni.fi.pv256.uco374366.Database.FilmDatabase;
+import cz.muni.fi.pv256.uco374366.Misc.DateFormater;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
 import cz.muni.fi.pv256.uco374366.R;
+import cz.muni.fi.pv256.uco374366.Service.Url;
 
 public class FragmentFilmDetail extends Fragment{
 
-    private static final String TMD_POSTER_URL = "http://image.tmdb.org/t/p/w150/";
-    private static final String TMD_BACKDROP_URL = "http://image.tmdb.org/t/p/w500/";
 
     private View mView = null;
     private Film mFilm = null;
@@ -40,14 +40,10 @@ public class FragmentFilmDetail extends Fragment{
         }
 
         @Override
-        public void onSuccess() {
-
-        }
+        public void onSuccess() {}
 
         @Override
-        public void onError() {
-
-        }
+        public void onError() {}
     }
 
     public void refreshLayout() {
@@ -60,7 +56,7 @@ public class FragmentFilmDetail extends Fragment{
             textViewTitle.setText(mFilm.getTitle());
 
             TextView textViewReleaseDate = (TextView) mView.findViewById(R.id.releaseDate);
-            textViewReleaseDate.setText(mFilm.getReleaseDay());
+            textViewReleaseDate.setText(DateFormater.toLocalFormat(mFilm.getReleaseDay()));
 
             TextView textViewDescription = (TextView) mView.findViewById(R.id.description);
             textViewDescription.setText(mFilm.getOverview());
@@ -72,7 +68,7 @@ public class FragmentFilmDetail extends Fragment{
             else {
                 Picasso
                     .with(getActivity().getApplicationContext())
-                    .load(TMD_POSTER_URL + mFilm.getPosterPath())
+                    .load(Url.URL_BASE_POSTER + mFilm.getPosterPath())
                     .into(imageViewPoster);
             }
 
@@ -87,7 +83,7 @@ public class FragmentFilmDetail extends Fragment{
             else {
                 Picasso
                     .with(getActivity().getApplicationContext())
-                    .load(TMD_BACKDROP_URL + mFilm.getBackdropPath())
+                    .load(Url.URL_BASE_BACKDROP + mFilm.getBackdropPath())
                     .into(imageViewBackdrop, new ImageLoadedCallback(progressBar) {
                         @Override
                         public void onSuccess() {

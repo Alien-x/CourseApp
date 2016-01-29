@@ -13,16 +13,12 @@ import android.widget.LinearLayout;
 import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
 import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
+import cz.muni.fi.pv256.uco374366.Sync.UpdaterSyncAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private static int mSource = R.id.action_discover;
-
-    public MainActivity() {
-        super();
-        Logger.log("MainActivity", "constructor");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setFragments(mSource);
+
+        UpdaterSyncAdapter.initializeSyncAdapter(this);
+
+
     }
 
     private void setFragments(int source) {
@@ -93,14 +93,17 @@ public class MainActivity extends AppCompatActivity {
         if(id == R.id.action_discover) {
             Logger.log("action", "discover");
             mSource = R.id.action_discover;
+            setFragments(mSource);
         }
         else if(id == R.id.action_favourites) {
             Logger.log("action", "favourites");
             mSource = R.id.action_favourites;
-
+            setFragments(mSource);
         }
-
-        setFragments(mSource);
+        else if(id == R.id.action_refresh) {
+            Logger.log("action", "favourites");
+            UpdaterSyncAdapter.syncImmediately(this);
+        }
 
         return super.onOptionsItemSelected(item);
     }

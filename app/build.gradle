@@ -1,6 +1,6 @@
 // versioning
-def versionMajor = 0
-def versionMinor = 1
+def versionMajor = 1
+def versionMinor = 0
 def versionPatch = 0
 def versionBuild = 0
 
@@ -58,9 +58,11 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.release
             defaultConfig.versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+            buildConfigField "boolean", "logging", "false"
         }
 
         debug {
+            buildConfigField "boolean", "logging", "true"
         }
 
 
@@ -68,13 +70,11 @@ android {
 
     productFlavors {
         primary {
-            buildConfigField "boolean", "logging", "false"
             buildConfigField "boolean", "secondary", "false"
         }
 
         secondary {
             applicationId "cz.muni.fi.pv256.uco374366_secondary"
-            buildConfigField "boolean", "logging", "true"
             buildConfigField "boolean", "secondary", "true"
         }
     }

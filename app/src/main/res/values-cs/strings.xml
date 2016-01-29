@@ -7,19 +7,21 @@
     <string name="no_network">Bez internetového připojení.</string>
     <string name="download_error">Při stahování se vyskytla chyba.</string>
 
+    <string name="action_favourites">Oblíbené</string>
+    <string name="film_group_favourites">Oblíbené</string>
     <string name="favourite_add">Přidáno do oblíbených.</string>
     <string name="favourite_remove">Odebráno z oblíbených.</string>
 
     <string name="film_title">Název filmu</string>
     <string name="film_release_date">Datum vydání</string>
     <string name="loading">Načítání...</string>
-    <string name="film_group_most_popular">Nejpopulárnější</string>
-    <string name="film_group_highest_rated">Nejlépe hodnocené</string>
+    <string name="film_group_most_popular">Most Nejpopulárnější</string>
     <string name="film_group_in_theaters">Právě v kinech</string>
     <string name="film_description">Popis</string>
-
     <string name="action_discover">Filmová databáze</string>
-    <string name="action_favourites">Oblíbené</string>
-    <string name="film_group_favourites">Oblíbené</string>
+    <string name="action_refresh">Aktualizovat oblíbené</string>
+    <string name="notification_text_1">Některé filmy</string>
+    <string name="notification_text_2">byly aktualizovány.</string>
+
 
 </resources>

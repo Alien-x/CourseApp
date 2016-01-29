@@ -56,7 +56,7 @@ public class DownloadService extends IntentService {
                 ArrayList<Film> films = new ArrayList<>();
 
                 for(int i = 0; i < groups.length; i++) {
-                    films.addAll(downloadData(groups[i]));
+                    films.addAll(downloadFilms(groups[i]));
                 }
 
                 /* Sending result back to activity */
@@ -75,7 +75,7 @@ public class DownloadService extends IntentService {
         this.stopSelf();
     }
 
-    private ArrayList<Film> downloadData(int group) throws IOException, DownloadException {
+    private ArrayList<Film> downloadFilms(int group) throws IOException, DownloadException {
 
 
         OkHttpClient client = new OkHttpClient();
@@ -109,31 +109,18 @@ public class DownloadService extends IntentService {
         }
 
 
-
-
         FilmListGson filmsJson = call.execute().body();
-
-        SimpleDateFormat dateFormater = new SimpleDateFormat(Url.DATE_FORMAT);
-        Locale locale = Locale.getDefault();
 
         ArrayList<Film> films = new ArrayList<>();
 
         for (FilmGson filmGson : filmsJson.films) {
-
-            String releaseDate = null;
-            try {
-                releaseDate = SimpleDateFormat
-                        .getDateInstance(SimpleDateFormat.LONG, locale)
-                        .format(dateFormater.parse(filmGson.release_date));
-            }
-            catch(Exception e) {}
 
             films.add(new Film(
                     filmGson.id,
                     group,
                     filmGson.title,
                     filmGson.overview,
-                    releaseDate,
+                    filmGson.release_date,
                     filmGson.poster_path,
                     filmGson.backdrop_path
             ));
@@ -143,6 +130,48 @@ public class DownloadService extends IntentService {
 
         return films;
     }
+
+    public static Film downloadFilm(Film film) throws IOException, DownloadException {
+
+        if(film == null) {
+            throw new NullPointerException("film cannot be null");
+        }
+
+        OkHttpClient client = new OkHttpClient();
+        client.interceptors().add(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Response response = chain.proceed(chain.request());
+                return response;
+            }
+        });
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Url.URL_BASE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        //Logger.log("sync_adapter down", "url = " + Url.URL_BASE + Url.URL_PART_FILM);
+
+        NetworkApi api = retrofit.create(NetworkApi.class);
+        Call<FilmGson> call;
+        call = api.loadFilm(film.getID());
+
+        FilmGson filmGson = call.execute().body();
+
+        return new Film(
+                filmGson.id,
+                0,
+                filmGson.title,
+                filmGson.overview,
+                filmGson.release_date,
+                filmGson.poster_path,
+                filmGson.backdrop_path
+        );
+    }
+
+
 
 
     public class DownloadException extends Exception {

@@ -96,10 +96,15 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
         mGridView = (StickyGridHeadersGridView) mView.findViewById(R.id.gridViewFilms);
         mGridView.setAdapter(mFilmAdapter);
 
-        if (NetworkAvailability.isOnline(getActivity())) {
-            mGridView.setEmptyView(mView.findViewById(R.id.loading));
-        } else {
-            mGridView.setEmptyView(mView.findViewById(R.id.no_connection_view));
+        if(mSource == R.id.action_discover) {
+            if (NetworkAvailability.isOnline(getActivity())) {
+                mGridView.setEmptyView(mView.findViewById(R.id.loading));
+            } else {
+                mGridView.setEmptyView(mView.findViewById(R.id.no_connection_view));
+            }
+        }
+        else {
+            mGridView.setEmptyView(mView.findViewById(R.id.empty_view));
         }
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -175,7 +180,6 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
         }
 
         if (mGridView != null) {
-            mGridView.setEmptyView(mView.findViewById(R.id.empty_view));
             mFilmAdapter.notifyDataSetChanged();
         }
 

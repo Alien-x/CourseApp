@@ -3,8 +3,6 @@ package cz.muni.fi.pv256.uco374366.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 /**
  * Created by Z on 18. 10. 2015.
  */
@@ -66,11 +64,6 @@ public class Film implements Parcelable {
         return "#" + mID + " : " + mTitle;
     }
 
-    @Override
-    public int hashCode() {
-        return (int)mID;
-    }
-
     /* PARCELABLE */
     @Override
     public int describeContents() {
@@ -104,5 +97,29 @@ public class Film implements Parcelable {
         mReleaseDate = in.readString();
         mPosterPath = in.readString();
         mBackdropPath = in.readString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof Film)) return false;
+        Film otherFilm = (Film)other;
+        try {
+            return mID == otherFilm.mID
+                && (mTitle == null ? mTitle == otherFilm.mTitle : mTitle.equals(otherFilm.mTitle))
+                && (mOverview == null ? mOverview == otherFilm.mOverview : mOverview.equals(otherFilm.mOverview))
+                && (mReleaseDate == null ? mReleaseDate == otherFilm.mReleaseDate : mReleaseDate.equals(otherFilm.mReleaseDate))
+                && (mPosterPath == null ? mPosterPath == otherFilm.mPosterPath : mPosterPath.equals(otherFilm.mPosterPath))
+                && (mBackdropPath == null ? mBackdropPath == otherFilm.mBackdropPath : mBackdropPath.equals(otherFilm.mBackdropPath));
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return (int)mID;
     }
 }
