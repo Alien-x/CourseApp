@@ -3,10 +3,10 @@ package cz.muni.fi.pv256.uco374366.Misc;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import cz.muni.fi.pv256.uco374366.Service.Url;
+import cz.muni.fi.pv256.uco374366.Network.Url;
 
 /**
- * Created by Z on 29. 1. 2016.
+ * Created by Zdenek Kanovsky on 05. 11. 2015.
  */
 public class DateFormater {
 

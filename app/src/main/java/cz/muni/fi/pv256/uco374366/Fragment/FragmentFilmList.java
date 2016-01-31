@@ -17,17 +17,21 @@ import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.muni.fi.pv256.uco374366.Activity.FilmDetailActivity;
+import cz.muni.fi.pv256.uco374366.App;
 import cz.muni.fi.pv256.uco374366.Database.FilmDatabase;
 import cz.muni.fi.pv256.uco374366.Misc.FilmAdapter;
-import cz.muni.fi.pv256.uco374366.FilmDetailFragmentAsActivity;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
 
 import cz.muni.fi.pv256.uco374366.R;
 import cz.muni.fi.pv256.uco374366.Service.DownloadService;
 import cz.muni.fi.pv256.uco374366.Service.DownloadServiceReceiver;
-import cz.muni.fi.pv256.uco374366.Service.NetworkAvailability;
+import cz.muni.fi.pv256.uco374366.Network.NetworkAvailability;
 
+/**
+ * Created by Zdenek Kanovsky on 10. 18. 2015.
+ */
 public class FragmentFilmList extends Fragment implements DownloadServiceReceiver.Receiver {
 
     private DownloadServiceReceiver mReceiver = null;
@@ -60,22 +64,28 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
         // download from net
         if(mSource == R.id.action_discover) {
 
-            // Starting Download Service
-            mReceiver = new DownloadServiceReceiver(new Handler());
-            mReceiver.setReceiver(this);
-            Intent intent = new Intent(Intent.ACTION_SYNC, null, getActivity(), DownloadService.class);
-
-            // Send optional extras to Download IntentService
-            intent.putExtra("receiver", mReceiver);
-            intent.putExtra("groups", new int[]{
-                    GROUP_IN_THEATERS,
-                    GROUP_MOST_POPULAR
-            });
-
             mHeaders.append(GROUP_IN_THEATERS, getActivity().getResources().getString(R.string.film_group_in_theaters));
             mHeaders.append(GROUP_MOST_POPULAR, getActivity().getResources().getString(R.string.film_group_most_popular));
 
-            getActivity().startService(intent);
+            List<Film> downloadedFilms = ((App) getActivity().getApplicationContext()).downloadedFilms;
+            if(downloadedFilms == null) {
+                // Starting Download Service
+                mReceiver = new DownloadServiceReceiver(new Handler());
+                mReceiver.setReceiver(this);
+                Intent intent = new Intent(Intent.ACTION_SYNC, null, getActivity(), DownloadService.class);
+
+                // Send optional extras to Download IntentService
+                intent.putExtra("receiver", mReceiver);
+                intent.putExtra("groups", new int[]{
+                        GROUP_IN_THEATERS,
+                        GROUP_MOST_POPULAR
+                });
+
+                getActivity().startService(intent);
+            }
+            else {
+                setFilms(downloadedFilms);
+            }
         }
         else if(mSource == R.id.action_favourites) {
 
@@ -121,7 +131,7 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
                 // mobile
                 else {
                     Logger.log("film_list", "new activity detail");
-                    Intent intent = new Intent(getActivity(), FilmDetailFragmentAsActivity.class);
+                    Intent intent = new Intent(getActivity(), FilmDetailActivity.class);
                     intent.putExtra("FILM", mFilms.get(position));
                     startActivity(intent);
                 }
@@ -154,6 +164,8 @@ public class FragmentFilmList extends Fragment implements DownloadServiceReceive
             case DownloadService.STATUS_FINISHED:
                 /* Hide progress & extract result from bundle */
                 List<Film> downFilms = resultData.getParcelableArrayList("films");
+                ((App) getActivity().getApplicationContext()).downloadedFilms = downFilms;
+
                 setFilms(downFilms);
                 /* Update ListView with result */
                 Logger.log("download_service", "STATUS_FINISHED");

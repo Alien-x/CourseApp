@@ -1,4 +1,4 @@
-package cz.muni.fi.pv256.uco374366;
+package cz.muni.fi.pv256.uco374366.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -8,9 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
+import cz.muni.fi.pv256.uco374366.BuildConfig;
 import cz.muni.fi.pv256.uco374366.Model.Film;
+import cz.muni.fi.pv256.uco374366.R;
 
-public class FilmDetailFragmentAsActivity extends AppCompatActivity {
+/**
+ * Created by Zdenek Kanovsky on 7. 11. 2015.
+ */
+public class FilmDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,7 @@ public class FilmDetailFragmentAsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_activity, menu);
         return true;
     }
 }

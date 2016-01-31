@@ -2,6 +2,9 @@
 *.apk
 *.ap_
 
+# log files
+*.log
+
 # files for the dex VM
 *.dex
 

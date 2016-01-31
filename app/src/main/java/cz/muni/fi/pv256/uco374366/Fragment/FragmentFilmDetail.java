@@ -19,8 +19,11 @@ import cz.muni.fi.pv256.uco374366.Misc.DateFormater;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
 import cz.muni.fi.pv256.uco374366.R;
-import cz.muni.fi.pv256.uco374366.Service.Url;
+import cz.muni.fi.pv256.uco374366.Network.Url;
 
+/**
+ * Created by Zdenek Kanovsky on 10. 18. 2015.
+ */
 public class FragmentFilmDetail extends Fragment{
 
 

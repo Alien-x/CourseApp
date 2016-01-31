@@ -3,19 +3,34 @@ package cz.muni.fi.pv256.uco374366.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Created by Z on 18. 10. 2015.
+ * Created by Zdenek Kanovsky on 18. 10. 2015.
  */
 public class Film implements Parcelable {
 
+    @SerializedName("id")
     private long mID;
+
     private int mGroup;
 
+    @SerializedName("original_title")
     private String mTitle;
+
+    @SerializedName("overview")
     private String mOverview;
+
+    @SerializedName("release_date")
     private String mReleaseDate;
+
+    @SerializedName("poster_path")
     private String mPosterPath;
+
+    @SerializedName("backdrop_path")
     private String mBackdropPath;
+
+
 
     public Film(long id, int group, String title, String overview, String releaseDate,
                 String posterPath, String backdropPath) {
@@ -28,6 +43,9 @@ public class Film implements Parcelable {
         mBackdropPath = backdropPath;
     }
 
+    public void setGroup(int group) {
+        mGroup = group;
+    }
 
     public long getID() {
         return mID;
@@ -123,3 +141,4 @@ public class Film implements Parcelable {
         return (int)mID;
     }
 }
+

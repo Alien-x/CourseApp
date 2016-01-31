@@ -13,6 +13,9 @@ import java.util.List;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
 
+/**
+ * Created by Zdenek Kanovsky on 29. 1. 2016.
+ */
 public class FilmDatabase extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;

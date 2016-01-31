@@ -1,11 +1,19 @@
 package cz.muni.fi.pv256.uco374366;
 
-
 import android.app.Application;
 import android.os.Build;
 import android.os.StrictMode;
 
+import java.util.List;
+
+import cz.muni.fi.pv256.uco374366.Model.Film;
+
+/**
+ * Created by Zdenek Kanovsky on 18. 10. 2015.
+ */
 public class App extends Application {
+
+    public List<Film> downloadedFilms = null;
 
     @Override
     public void onCreate() {

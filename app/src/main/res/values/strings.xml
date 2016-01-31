@@ -2,7 +2,7 @@
 
     <string name="app_id" translatable="false">uco374366</string>
     <string name="content_authority" translatable="false">cz.muni.fi.pv256.uco374366</string>
-    <string name="account_type" translatable="false">PublicAccount</string>
+    <string name="account_type" translatable="false">tmdb_account</string>
 
 
     <string name="app_name">The movie database</string>

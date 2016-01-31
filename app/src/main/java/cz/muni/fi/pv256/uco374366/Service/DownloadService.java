@@ -11,20 +11,22 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
 
 import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
-import cz.muni.fi.pv256.uco374366.Misc.Logger;
-import cz.muni.fi.pv256.uco374366.Model.FilmGson;
-import cz.muni.fi.pv256.uco374366.Model.FilmListGson;
+import cz.muni.fi.pv256.uco374366.Model.FilmList;
+import cz.muni.fi.pv256.uco374366.Network.NetworkApi;
+import cz.muni.fi.pv256.uco374366.Network.Url;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.Call;
 
 import cz.muni.fi.pv256.uco374366.Model.Film;
 
+/**
+ * Created by Zdenek Kanovsky on 29. 1. 2016.
+ */
 public class DownloadService extends IntentService {
 
     public static final int STATUS_RUNNING = 0;
@@ -75,7 +77,7 @@ public class DownloadService extends IntentService {
         this.stopSelf();
     }
 
-    private ArrayList<Film> downloadFilms(int group) throws IOException, DownloadException {
+    private List<Film> downloadFilms(int group) throws IOException, DownloadException {
 
 
         OkHttpClient client = new OkHttpClient();
@@ -95,7 +97,7 @@ public class DownloadService extends IntentService {
                 .build();
 
         NetworkApi api = retrofit.create(NetworkApi.class);
-        Call<FilmListGson> call;
+        Call<FilmList> call;
 
         switch(group) {
             case FragmentFilmList.GROUP_MOST_POPULAR:
@@ -109,25 +111,10 @@ public class DownloadService extends IntentService {
         }
 
 
-        FilmListGson filmsJson = call.execute().body();
-
-        ArrayList<Film> films = new ArrayList<>();
-
-        for (FilmGson filmGson : filmsJson.films) {
-
-            films.add(new Film(
-                    filmGson.id,
-                    group,
-                    filmGson.title,
-                    filmGson.overview,
-                    filmGson.release_date,
-                    filmGson.poster_path,
-                    filmGson.backdrop_path
-            ));
-
+        List<Film> films = call.execute().body().films;
+        for(Film film : films) {
+            film.setGroup(group);
         }
-        Logger.log("film_list", films.size() + " films added");
-
         return films;
     }
 
@@ -155,20 +142,12 @@ public class DownloadService extends IntentService {
         //Logger.log("sync_adapter down", "url = " + Url.URL_BASE + Url.URL_PART_FILM);
 
         NetworkApi api = retrofit.create(NetworkApi.class);
-        Call<FilmGson> call;
+        Call<Film> call;
         call = api.loadFilm(film.getID());
 
-        FilmGson filmGson = call.execute().body();
-
-        return new Film(
-                filmGson.id,
-                0,
-                filmGson.title,
-                filmGson.overview,
-                filmGson.release_date,
-                filmGson.poster_path,
-                filmGson.backdrop_path
-        );
+        film = call.execute().body();
+        film.setGroup(0);
+        return film;
     }
 
 

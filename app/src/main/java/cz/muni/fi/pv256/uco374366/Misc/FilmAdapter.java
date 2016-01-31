@@ -21,7 +21,7 @@ import cz.muni.fi.pv256.uco374366.Model.Film;
 import cz.muni.fi.pv256.uco374366.R;
 
 /**
- * Created by Z on 18. 10. 2015.
+ * Created by Zdenek Kanovsky on 18. 10. 2015.
  */
 public class FilmAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
 

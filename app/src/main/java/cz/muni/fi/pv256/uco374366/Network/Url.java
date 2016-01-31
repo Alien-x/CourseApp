@@ -1,4 +1,4 @@
-package cz.muni.fi.pv256.uco374366.Service;
+package cz.muni.fi.pv256.uco374366.Network;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -6,6 +6,9 @@ import java.util.Date;
 
 import cz.muni.fi.pv256.uco374366.BuildConfig;
 
+/**
+ * Created by Zdenek Kanovsky on 25. 1. 2016.
+ */
 public final class Url {
     private static final String API_KEY = "api_key=" + BuildConfig.tmd_api_key;
 

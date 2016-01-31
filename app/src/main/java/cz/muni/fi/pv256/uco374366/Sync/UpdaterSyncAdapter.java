@@ -1,6 +1,5 @@
 package cz.muni.fi.pv256.uco374366.Sync;
 
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.NotificationManager;
@@ -19,12 +18,15 @@ import android.support.v4.app.NotificationCompat;
 import java.util.List;
 
 import cz.muni.fi.pv256.uco374366.Database.FilmDatabase;
-import cz.muni.fi.pv256.uco374366.MainActivity;
+import cz.muni.fi.pv256.uco374366.Activity.MainActivity;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
 import cz.muni.fi.pv256.uco374366.Model.Film;
 import cz.muni.fi.pv256.uco374366.R;
 import cz.muni.fi.pv256.uco374366.Service.DownloadService;
 
+/**
+ * Created by Zdenek Kanovsky on 29. 1. 2016.
+ */
 public class UpdaterSyncAdapter extends AbstractThreadedSyncAdapter {
 
     // Interval at which to sync with the server, in seconds.

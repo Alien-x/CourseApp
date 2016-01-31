@@ -4,6 +4,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+/**
+ * Created by Zdenek Kanovsky on 29. 1. 2016.
+ */
 public class UpdaterSyncService extends Service {
 
     private static final Object LOCK = new Object();

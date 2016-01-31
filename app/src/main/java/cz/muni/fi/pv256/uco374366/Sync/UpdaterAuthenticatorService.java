@@ -4,9 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-
 /**
- * The service which allows the sync adapter framework to access the authenticator.
+ * Created by Zdenek Kanovsky on 29. 1. 2016.
  */
 public class UpdaterAuthenticatorService extends Service {
     // Instance field that stores the authenticator object

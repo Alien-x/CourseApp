@@ -1,4 +1,4 @@
-package cz.muni.fi.pv256.uco374366;
+package cz.muni.fi.pv256.uco374366.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,10 +12,14 @@ import android.widget.LinearLayout;
 
 import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmDetail;
 import cz.muni.fi.pv256.uco374366.Fragment.FragmentFilmList;
+import cz.muni.fi.pv256.uco374366.BuildConfig;
 import cz.muni.fi.pv256.uco374366.Misc.Logger;
+import cz.muni.fi.pv256.uco374366.R;
 import cz.muni.fi.pv256.uco374366.Sync.UpdaterSyncAdapter;
 
-
+/**
+ * Created by Zdenek Kanovsky on 10. 18. 2016.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static int mSource = R.id.action_discover;

@@ -1,11 +1,11 @@
-package cz.muni.fi.pv256.uco374366.Service;
+package cz.muni.fi.pv256.uco374366.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Created by Z on 25. 1. 2016.
+ * Created by Zdenek Kanovsky on 25. 1. 2016.
  */
 public class NetworkAvailability {
 

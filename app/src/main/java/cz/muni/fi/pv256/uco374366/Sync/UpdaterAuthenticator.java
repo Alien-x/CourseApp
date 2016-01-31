@@ -1,6 +1,5 @@
 package cz.muni.fi.pv256.uco374366.Sync;
 
-
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
@@ -8,6 +7,9 @@ import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.os.Bundle;
 
+/**
+ * Created by Zdenek Kanovsky on 29. 1. 2016.
+ */
 public class UpdaterAuthenticator extends AbstractAccountAuthenticator {
 
     public UpdaterAuthenticator(Context context) {
